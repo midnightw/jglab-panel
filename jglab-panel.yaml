@@ -19,7 +19,6 @@ logger:
 wifi:
   ap:
     ssid: "JG LAB Panel Setup"
-  ap_timeout: 30s
   reboot_timeout: 0s
   power_save_mode: none
 
