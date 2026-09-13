@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="800" viewBox="0 0 480 800">
+<defs>
+  <style>
+    .w{fill:#f5f5f5}.y{fill:#fdc106}.g{fill:#47e897}.mut{fill:#9ca3a8}
+    .line{stroke:#50565a;stroke-width:1;fill:none}.yl{stroke:#fdc106;stroke-width:2;fill:none}
+    .card{fill:#0b0d0e;stroke:#5b6267;stroke-width:1;rx:7}
+    .lab{font-family:Arial,sans-serif;font-weight:700;letter-spacing:.5px}
+    .small{font-family:Arial,sans-serif;font-size:11px;font-weight:700;fill:#f5f5f5}
+  </style>
+  <pattern id="haz" width="30" height="18" patternUnits="userSpaceOnUse" patternTransform="skewX(-25)">
+    <rect width="16" height="18" fill="#fdc106"/><rect x="16" width="14" height="18" fill="#070809"/>
+  </pattern>
+</defs>
+<rect width="480" height="800" fill="#070809"/>
+<!-- outer frame -->
+<path d="M10 24V10h14 M456 10h14v14 M10 776v14h14 M456 790h14v-14" class="yl"/>
+<path d="M32 10h416 M10 34v724 M470 34v724 M32 790h416" class="line"/>
+<!-- logo -->
+<circle cx="96" cy="96" r="72" fill="#070809" stroke="#fdc106" stroke-width="3"/>
+<line x1="48" y1="66" x2="144" y2="66" stroke="#fdc106" stroke-width="1"/>
+<!-- simplified 3 tool icons -->
+<path d="M56 39h28v6H56zm5 8h18l-4 12H65zM70 59v8m-7 0h14" class="w"/>
+<path d="M94 40h10v14H94zm-5 15h20v6H89z" class="y"/>
+<path d="M99 63l-4 10h8z" class="y"/>
+<path d="M120 42l20 20M140 42l-20 20" stroke="#f5f5f5" stroke-width="5" stroke-linecap="round"/>
+<text x="52" y="102" font-size="28" class="lab w">JG</text>
+<text x="91" y="102" font-size="28" class="lab y">LAB</text>
+<text x="64" y="119" font-size="9" letter-spacing="3" class="w">MAKER ROOM</text>
+<rect x="36" y="129" width="120" height="26" fill="url(#haz)" clip-path="url(#none)"/>
+<circle cx="96" cy="96" r="72" fill="none" stroke="#fdc106" stroke-width="3"/>
+<!-- time area remains transparent for dynamic labels -->
+<rect x="392" y="23" width="54" height="9" fill="url(#haz)"/>
+<line x1="20" y1="198" x2="460" y2="198" class="line"/>
+<rect x="22" y="206" width="105" height="12" fill="url(#haz)"/>
+<line x1="138" y1="212" x2="344" y2="212" stroke="#fdc106" stroke-width="2"/>
+<rect x="354" y="206" width="104" height="12" fill="url(#haz)"/>
+<!-- cards -->
+<rect x="18" y="238" width="216" height="105" class="card"/>
+<rect x="246" y="238" width="216" height="105" class="card"/>
+<rect x="18" y="352" width="216" height="105" class="card"/>
+<rect x="246" y="352" width="216" height="105" class="card"/>
+<rect x="18" y="468" width="140" height="88" class="card"/>
+<rect x="170" y="468" width="140" height="88" class="card"/>
+<rect x="322" y="468" width="140" height="88" class="card"/>
+<rect x="18" y="574" width="444" height="82" class="card"/>
+<!-- icon circles -->
+<g fill="#070809" stroke="#fdc106" stroke-width="3">
+<circle cx="58" cy="289" r="28"/><circle cx="286" cy="289" r="28"/>
+<circle cx="58" cy="403" r="28"/><circle cx="286" cy="403" r="28"/>
+<circle cx="50" cy="512" r="23"/><circle cx="202" cy="512" r="23"/><circle cx="354" cy="512" r="23"/>
+</g>
+<!-- thermometer -->
+<path d="M58 271v28a10 10 0 1 0 8 0v-28a8 8 0 0 0-16 0v28" fill="none" stroke="#f5f5f5" stroke-width="4" stroke-linecap="round"/>
+<!-- droplet -->
+<path d="M286 265c-10 15-17 23-17 33a17 17 0 0 0 34 0c0-10-7-18-17-33z" fill="none" stroke="#f5f5f5" stroke-width="4"/>
+<!-- 3d print nozzle -->
+<path d="M45 385h26v5H45zm4 7h18l-4 11H53z" class="w"/><path d="M58 404v7c0 2-8 1-8 6s18-1 18 5" fill="none" stroke="#fdc106" stroke-width="3" stroke-linecap="round"/>
+<!-- air -->
+<path d="M268 394h22c8 0 8-10 1-10-4 0-5 3-5 5M267 403h30c10 0 10 12 1 12-5 0-6-4-6-6M268 412h15" fill="none" stroke="#f5f5f5" stroke-width="4" stroke-linecap="round"/>
+<!-- lower 3d print icon -->
+<path d="M39 496h22v5H39zm4 7h14l-3 9h-8z" class="w"/><path d="M50 512v6c0 2-7 1-7 5s15-1 15 4" fill="none" stroke="#fdc106" stroke-width="2.5" stroke-linecap="round"/>
+<!-- wifi -->
+<path d="M185 505q17-14 34 0M191 512q11-9 22 0M199 520q3-3 6 0" fill="none" stroke="#f5f5f5" stroke-width="4" stroke-linecap="round"/>
+<!-- chip -->
+<rect x="343" y="501" width="22" height="22" rx="2" fill="none" stroke="#f5f5f5" stroke-width="3"/>
+<path d="M347 495v6m7-6v6m7-6v6m-14 22v6m7-6v6m7-6v6m-24-18h6m-6 7h6m22-7h6m-6 7h6" stroke="#f5f5f5" stroke-width="2"/>
+<!-- static labels -->
+<text x="96" y="267" class="small">TEMP LAB</text>
+<text x="324" y="267" class="small">HUMIDITÉ</text>
+<text x="96" y="381" class="small">CO₂</text>
+<text x="324" y="381" class="small">AIR</text>
+<text x="80" y="495" class="small">H2S</text>
+<text x="232" y="495" class="small">NETWORK</text>
+<text x="384" y="495" class="small">NODE 01</text>
+<!-- bar indicators -->
+<g fill="#fdc106"><rect x="199" y="311" width="4" height="8"/><rect x="207" y="303" width="4" height="16"/><rect x="215" y="295" width="4" height="24"/></g><rect x="223" y="287" width="4" height="32" fill="#47e897"/>
+<g fill="#fdc106"><rect x="427" y="311" width="4" height="8"/><rect x="435" y="303" width="4" height="16"/><rect x="443" y="295" width="4" height="24"/></g><rect x="451" y="287" width="4" height="32" fill="#47e897"/>
+<g fill="#fdc106"><rect x="199" y="425" width="4" height="8"/><rect x="207" y="417" width="4" height="16"/><rect x="215" y="409" width="4" height="24"/></g><rect x="223" y="401" width="4" height="32" fill="#47e897"/>
+<g fill="#fdc106"><rect x="427" y="425" width="4" height="8"/><rect x="435" y="417" width="4" height="16"/><rect x="443" y="409" width="4" height="24"/></g><rect x="451" y="401" width="4" height="32" fill="#47e897"/>
+<!-- system lines -->
+<line x1="33" y1="615" x2="105" y2="615" class="line"/><line x1="375" y1="615" x2="447" y2="615" class="line"/>
+<rect x="105" y="594" width="270" height="42" rx="21" fill="#07100c" stroke="#47e897" stroke-width="1"/>
+<rect x="390" y="760" width="54" height="9" fill="url(#haz)"/>
+<text x="28" y="767" font-family="Arial,sans-serif" font-size="8" letter-spacing="2" class="mut">JG LAB | MAKER ROOM</text>
+</svg>
