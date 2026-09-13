@@ -100,7 +100,7 @@ font:
       weight: 700
     id: font_value
     size: 31
-    glyphs: "0123456789.-% °CppmABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    glyphs: "0123456789.-% °ABCDEFGHIJKLMNOPQRSTUVWXYZpm"
 
   - file:
       type: gfonts
