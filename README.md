@@ -1,5 +1,7 @@
 # JG LAB Panel
 
+🌐 **Installer JG LAB Panel : https://midnightw.github.io/jglab-panel/**
+
 Firmware + interface web de flash pour le **Waveshare ESP32-S3-Touch-LCD-7** (800×480, tactile capacitif), utilisé en **portrait 480×800**.
 
 ## Matériel ciblé
@@ -50,6 +52,6 @@ Les capteurs partagent l’I²C de la carte (`SDA GPIO8`, `SCL GPIO9`) :
 
 - `jglab-panel.yaml` : logique et interface LVGL
 - `board_waveshare_7.yaml` : configuration matérielle
-- `assets/jglab_background.png` : interface graphique 480×800
+- `assets/jglab_background.svg` : interface graphique 480×800
 - `installer/index.html` : interface de flash web
 - `.github/workflows/build-and-pages.yml` : compilation + publication
