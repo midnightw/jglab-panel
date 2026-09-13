@@ -1,0 +1,51 @@
+# JG LAB Panel - hardware profile
+# Waveshare ESP32-S3-Touch-LCD-7 (800x480, capacitive touch)
+# Current retail board: ESP32-S3 N16R8 (16 MB flash / 8 MB PSRAM)
+
+esphome:
+  min_version: "2026.8.0"
+
+esp32:
+  variant: esp32s3
+  flash_size: 16MB
+  cpu_frequency: 240MHz
+  framework:
+    type: esp-idf
+    advanced:
+      execute_from_psram: true
+
+psram:
+  mode: octal
+  speed: 80MHz
+
+i2c:
+  - id: bus_a
+    sda: GPIO8
+    scl: GPIO9
+    scan: true
+
+# On this Waveshare board the CH422G controls panel/touch reset and panel enables.
+ch422g:
+  - id: ch422g_hub
+
+# ESPHome has a native model for this exact 800x480 Waveshare board.
+display:
+  - platform: mipi_rgb
+    model: ESP32-S3-TOUCH-LCD-7-800X480
+    id: waveshare_display
+    update_interval: never
+    auto_clear_enabled: false
+    color_order: RGB
+
+# GT911 capacitive touch panel. LVGL rotation below automatically rotates touch coordinates.
+touchscreen:
+  - platform: gt911
+    id: waveshare_touch
+    i2c_id: bus_a
+    display: waveshare_display
+    interrupt_pin: GPIO4
+    reset_pin:
+      ch422g: ch422g_hub
+      number: 1
+      mode:
+        output: true
