@@ -27,6 +27,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Recreate dashboard PNG
+        shell: bash
+        run: |
+          set -euxo pipefail
+          cat assets/base64/part*.txt | tr -d '\n\r' | base64 --decode > assets/jglab_background.png
+          test -s assets/jglab_background.png
+          file assets/jglab_background.png
+
       - name: Build ESPHome firmware
         id: esphome
         uses: esphome/build-action@v8.1.0
