@@ -52,6 +52,6 @@ Les capteurs partagent l’I²C de la carte (`SDA GPIO8`, `SCL GPIO9`) :
 
 - `jglab-panel.yaml` : logique et interface LVGL
 - `board_waveshare_7.yaml` : configuration matérielle
-- `assets/jglab_background.svg` : interface graphique 480×800
+- `assets/jglab_background.png` : interface graphique 480×800\n- `assets/jglab_background.svg` : source vectorielle conservée à titre de référence
 - `installer/index.html` : interface de flash web
 - `.github/workflows/build-and-pages.yml` : compilation + publication
