@@ -44,7 +44,7 @@ jobs:
           mkdir -p site/firmware
           cp installer/index.html site/index.html
           cp -R "${{ steps.esphome.outputs.name }}/." site/firmware/
-          cp assets/jglab_background.svg site/preview.svg
+          cp assets/jglab_background.png site/preview.png
 
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v4
