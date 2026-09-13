@@ -27,13 +27,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Recreate dashboard PNG
-        shell: bash
-        run: |
-          set -euxo pipefail
-          cat assets/base64/part*.txt | tr -d '\n\r' | base64 --decode > assets/jglab_background.png
-          test -s assets/jglab_background.png
-          file assets/jglab_background.png
 
       - name: Build ESPHome firmware
         id: esphome
@@ -51,7 +44,7 @@ jobs:
           mkdir -p site/firmware
           cp installer/index.html site/index.html
           cp -R "${{ steps.esphome.outputs.name }}/." site/firmware/
-          cp assets/jglab_background.png site/preview.png
+          cp assets/jglab_background.svg site/preview.svg
 
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v4
