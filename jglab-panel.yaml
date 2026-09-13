@@ -1,0 +1,356 @@
+substitutions:
+  device_name: jglab-panel
+  friendly_name: "JG LAB Panel"
+  project_version: "0.2.0"
+
+packages:
+  waveshare_hardware: !include board_waveshare_7.yaml
+
+esphome:
+  name: ${device_name}
+  friendly_name: ${friendly_name}
+  project:
+    name: "jglab.panel"
+    version: ${project_version}
+
+logger:
+  level: INFO
+
+wifi:
+  ap:
+    ssid: "JG LAB Panel Setup"
+  ap_timeout: 30s
+  reboot_timeout: 0s
+  power_save_mode: none
+
+captive_portal:
+improv_serial:
+
+ota:
+  - platform: esphome
+
+time:
+  - platform: sntp
+    id: lab_time
+    timezone: Europe/Zurich
+
+binary_sensor:
+  - platform: status
+    id: network_connected
+    internal: true
+
+sensor:
+  - platform: sht4x
+    i2c_id: bus_a
+    address: 0x44
+    update_interval: 10s
+    temperature:
+      id: lab_temperature
+      internal: true
+    humidity:
+      id: lab_humidity
+      internal: true
+
+  - platform: scd4x
+    id: co2_module
+    i2c_id: bus_a
+    address: 0x62
+    update_interval: 10s
+    co2:
+      id: lab_co2
+      internal: true
+    temperature:
+      id: co2_temperature
+      internal: true
+    humidity:
+      id: co2_humidity
+      internal: true
+
+  - platform: wifi_signal
+    id: wifi_rssi
+    internal: true
+    update_interval: 10s
+
+image:
+  - platform: file
+    id: jglab_background
+    file: "assets/jglab_background.png"
+    type: RGB565
+    transparency: opaque
+
+font:
+  - file:
+      type: gfonts
+      family: Montserrat
+      weight: 700
+    id: font_time
+    size: 70
+    glyphs: "0123456789:-"
+
+  - file:
+      type: gfonts
+      family: Montserrat
+      weight: 600
+    id: font_date
+    size: 13
+    glyphs: " ABCDEFGHIJKLMNOPQRSTUVWXYZÉÛ0123456789-"
+
+  - file:
+      type: gfonts
+      family: Montserrat
+      weight: 700
+    id: font_value
+    size: 31
+    glyphs: "0123456789.-% °CppmABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+  - file:
+      type: gfonts
+      family: Montserrat
+      weight: 700
+    id: font_status
+    size: 17
+    glyphs: " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-"
+
+  - file:
+      type: gfonts
+      family: Montserrat
+      weight: 500
+    id: font_node
+    size: 11
+    glyphs: " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-."
+
+  - file:
+      type: gfonts
+      family: Montserrat
+      weight: 600
+    id: font_system
+    size: 14
+    glyphs: " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-"
+
+lvgl:
+  displays:
+    - waveshare_display
+  touchscreens:
+    - touchscreen_id: waveshare_touch
+  rotation: 90
+  bg_color: 0x070809
+  pages:
+    - id: main_page
+      bg_color: 0x070809
+      widgets:
+        - image:
+            src: jglab_background
+            x: 0
+            y: 0
+            width: 480
+            height: 800
+
+        - label:
+            id: clock_label
+            x: 175
+            y: 48
+            width: 292
+            height: 88
+            text: "--:--"
+            text_align: CENTER
+            text_font: font_time
+            text_color: 0xF5F5F5
+            bg_opa: TRANSP
+
+        - label:
+            id: date_label
+            x: 176
+            y: 139
+            width: 288
+            height: 32
+            text: "EN ATTENTE DU WIFI"
+            text_align: CENTER
+            text_font: font_date
+            text_color: 0xF5F5F5
+            bg_opa: TRANSP
+
+        - label:
+            id: temperature_label
+            x: 99
+            y: 286
+            width: 122
+            height: 44
+            text: "--.-°C"
+            text_align: LEFT
+            text_font: font_value
+            text_color: 0xF5F5F5
+            bg_opa: TRANSP
+
+        - label:
+            id: humidity_label
+            x: 331
+            y: 286
+            width: 122
+            height: 44
+            text: "-- %"
+            text_align: LEFT
+            text_font: font_value
+            text_color: 0xF5F5F5
+            bg_opa: TRANSP
+
+        - label:
+            id: co2_label
+            x: 99
+            y: 424
+            width: 122
+            height: 44
+            text: "-- ppm"
+            text_align: LEFT
+            text_font: font_value
+            text_color: 0xF5F5F5
+            bg_opa: TRANSP
+
+        - label:
+            id: air_label
+            x: 331
+            y: 424
+            width: 122
+            height: 44
+            text: "--"
+            text_align: LEFT
+            text_font: font_value
+            text_color: 0xF5F5F5
+            bg_opa: TRANSP
+
+        - label:
+            id: h2s_status_label
+            x: 85
+            y: 559
+            width: 66
+            height: 30
+            text: "READY"
+            text_align: LEFT
+            text_font: font_status
+            text_color: 0x47E897
+            bg_opa: TRANSP
+
+        - label:
+            id: network_label
+            x: 235
+            y: 559
+            width: 72
+            height: 30
+            text: "SETUP"
+            text_align: CENTER
+            text_font: font_status
+            text_color: 0x47E897
+            bg_opa: TRANSP
+
+        - label:
+            id: node_label
+            x: 391
+            y: 562
+            width: 64
+            height: 22
+            text: "ESP32-S3"
+            text_align: CENTER
+            text_font: font_node
+            text_color: 0xE3E3E3
+            bg_opa: TRANSP
+
+        - label:
+            id: system_dot
+            x: 143
+            y: 667
+            width: 26
+            height: 30
+            text: "●"
+            text_align: CENTER
+            text_font: font_status
+            text_color: 0x47E897
+            bg_opa: TRANSP
+
+        - label:
+            id: system_label
+            x: 172
+            y: 670
+            width: 184
+            height: 28
+            text: "WIFI SETUP"
+            text_align: CENTER
+            text_font: font_system
+            text_color: 0x47E897
+            bg_opa: TRANSP
+
+interval:
+  - interval: 1s
+    then:
+      - lvgl.label.update:
+          id: clock_label
+          text: !lambda |-
+            auto now = id(lab_time).now();
+            if (!now.is_valid()) return std::string("--:--");
+            char buf[6];
+            snprintf(buf, sizeof(buf), "%02d:%02d", now.hour, now.minute);
+            return std::string(buf);
+
+      - lvgl.label.update:
+          id: date_label
+          text: !lambda |-
+            auto now = id(lab_time).now();
+            if (!now.is_valid()) return std::string("EN ATTENTE DU WIFI");
+            static const char *days[] = {
+              "DIMANCHE", "LUNDI", "MARDI", "MERCREDI", "JEUDI", "VENDREDI", "SAMEDI"
+            };
+            static const char *months[] = {
+              "JANVIER", "FÉVRIER", "MARS", "AVRIL", "MAI", "JUIN",
+              "JUILLET", "AOÛT", "SEPTEMBRE", "OCTOBRE", "NOVEMBRE", "DÉCEMBRE"
+            };
+            char buf[48];
+            snprintf(buf, sizeof(buf), "%s %d %s", days[now.day_of_week - 1], now.day_of_month, months[now.month - 1]);
+            return std::string(buf);
+
+      - lvgl.label.update:
+          id: temperature_label
+          text: !lambda |-
+            float v = NAN;
+            if (id(lab_temperature).has_state()) v = id(lab_temperature).state;
+            else if (id(co2_temperature).has_state()) v = id(co2_temperature).state;
+            if (isnan(v)) return std::string("--.-°C");
+            char buf[16];
+            snprintf(buf, sizeof(buf), "%.1f°C", v);
+            return std::string(buf);
+
+      - lvgl.label.update:
+          id: humidity_label
+          text: !lambda |-
+            float v = NAN;
+            if (id(lab_humidity).has_state()) v = id(lab_humidity).state;
+            else if (id(co2_humidity).has_state()) v = id(co2_humidity).state;
+            if (isnan(v)) return std::string("-- %");
+            char buf[12];
+            snprintf(buf, sizeof(buf), "%.0f %%", v);
+            return std::string(buf);
+
+      - lvgl.label.update:
+          id: co2_label
+          text: !lambda |-
+            if (!id(lab_co2).has_state() || isnan(id(lab_co2).state)) return std::string("-- ppm");
+            char buf[16];
+            snprintf(buf, sizeof(buf), "%.0f ppm", id(lab_co2).state);
+            return std::string(buf);
+
+      - lvgl.label.update:
+          id: air_label
+          text: !lambda |-
+            if (!id(lab_co2).has_state() || isnan(id(lab_co2).state)) return std::string("--");
+            float c = id(lab_co2).state;
+            if (c < 800) return std::string("GOOD");
+            if (c < 1200) return std::string("OK");
+            if (c < 1600) return std::string("HIGH");
+            return std::string("BAD");
+
+      - lvgl.label.update:
+          id: network_label
+          text: !lambda |-
+            return id(network_connected).state ? std::string("ONLINE") : std::string("SETUP");
+
+      - lvgl.label.update:
+          id: system_label
+          text: !lambda |-
+            return id(network_connected).state ? std::string("SYSTEM NOMINAL") : std::string("WIFI SETUP");
