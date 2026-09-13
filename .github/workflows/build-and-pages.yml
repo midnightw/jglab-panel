@@ -1,0 +1,72 @@
+name: Build JG LAB Panel and publish web installer
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'jglab-panel.yaml'
+      - 'board_waveshare_7.yaml'
+      - 'assets/**'
+      - 'installer/**'
+      - '.github/workflows/build-and-pages.yml'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: jglab-panel-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build ESPHome firmware
+        id: esphome
+        uses: esphome/build-action@v8.1.0
+        with:
+          yaml-file: jglab-panel.yaml
+          version: 2026.8.2
+          complete-manifest: true
+          release-summary: "JG LAB Panel for Waveshare ESP32-S3-Touch-LCD-7"
+
+      - name: Prepare installer site
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p site/firmware
+          cp installer/index.html site/index.html
+          cp -R "${{ steps.esphome.outputs.name }}/." site/firmware/
+          cp assets/jglab_background.png site/preview.png
+
+      - name: Upload firmware artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: jglab-panel-firmware
+          path: ${{ steps.esphome.outputs.name }}
+          if-no-files-found: error
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
