@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#070809" />
+  <title>JG LAB Panel Installer</title>
+  <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+  <style>
+    :root { --yellow:#FDC106; --black:#070809; --card:#0b0d0e; --white:#f5f5f5; --green:#47e897; --line:#343a3e; }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--black);color:var(--white);font-family:Inter,Montserrat,Arial,sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px}
+    .panel{width:min(680px,96vw);border:1px solid #4d5358;border-radius:18px;padding:34px;background:linear-gradient(180deg,#0d0f10,#070809);box-shadow:0 24px 80px #000}
+    .stripe{height:10px;background:repeating-linear-gradient(135deg,var(--yellow) 0 18px,transparent 18px 30px);margin-bottom:26px}
+    h1{margin:0;font-size:34px;letter-spacing:.08em} h1 span{color:var(--yellow)}
+    .sub{opacity:.7;letter-spacing:.14em;margin-top:7px;font-size:12px;line-height:1.6}
+    p{line-height:1.55;color:#c9cdd0}
+    .steps{margin:26px 0;padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+    .steps p{margin:7px 0}
+    esp-web-install-button{--esp-tools-button-color:var(--yellow);--esp-tools-button-text-color:#000;--esp-tools-button-border-radius:9px}
+    button[slot=activate]{border:0;border-radius:9px;background:var(--yellow);color:#000;font-weight:800;font-size:16px;padding:15px 24px;cursor:pointer;width:100%}
+    .ok{color:var(--green)} .tiny{font-size:12px;opacity:.62;margin-top:22px}
+    .note{font-size:13px;color:#aeb4b8;border-top:1px solid var(--line);margin-top:24px;padding-top:18px}
+  </style>
+</head>
+<body>
+  <main class="panel">
+    <div class="stripe"></div>
+    <h1>JG <span>LAB</span> PANEL</h1>
+    <div class="sub">WAVESHARE ESP32-S3 · 7&quot; TOUCH · 480×800 PORTRAIT</div>
+    <div class="steps">
+      <p>1. Branche le port USB-C <strong>UART</strong> du panneau au Mac/PC.</p>
+      <p>2. Clique sur <strong>Installer JG LAB Panel</strong>.</p>
+      <p>3. Une fois flashé, configure le Wi-Fi depuis l’assistant USB ou le point d’accès <strong>JG LAB Panel Setup</strong>.</p>
+    </div>
+    <esp-web-install-button manifest="./firmware/manifest.json">
+      <button slot="activate">Installer JG LAB Panel</button>
+      <span slot="unsupported">Utilise Chrome ou Edge sur ordinateur : Web Serial est requis.</span>
+      <span slot="not-allowed">Cette page doit être ouverte en HTTPS.</span>
+    </esp-web-install-button>
+    <p class="note">Si la carte n’apparaît pas : maintiens <strong>BOOT</strong>, appuie brièvement sur <strong>RESET</strong>, puis relâche BOOT.</p>
+    <p class="tiny"><span class="ok">●</span> JG LAB Panel · ESPHome + LVGL · Waveshare ESP32-S3-Touch-LCD-7</p>
+  </main>
+</body>
+</html>
