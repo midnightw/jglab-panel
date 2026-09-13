@@ -73,7 +73,7 @@ sensor:
 image:
   - platform: file
     id: jglab_background
-    file: "assets/jglab_background.svg"
+    file: "assets/jglab_background.png"
     type: RGB565
     transparency: opaque
 
